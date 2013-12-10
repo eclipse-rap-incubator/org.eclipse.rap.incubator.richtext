@@ -9,4 +9,4 @@ Bundle-Vendor: Eclipse.org - RAP Incubator
 Import-Package: javax.servlet;version="2.5.0",
  javax.servlet.http;version="2.5.0"
 Export-Package: org.eclipse.rap.addons.ckeditor;version="0.1.0"
-Require-Bundle: org.eclipse.rap.rwt;bundle-version="[2.1.0,3.0.0)"
+Require-Bundle: org.eclipse.rap.rwt;bundle-version="[2.3.0,3.0.0)"
