@@ -26,7 +26,7 @@ import org.eclipse.rap.rwt.remote.Connection;
 import org.eclipse.rap.rwt.remote.OperationHandler;
 import org.eclipse.rap.rwt.remote.RemoteObject;
 import org.eclipse.rap.rwt.service.ResourceManager;
-import org.eclipse.rap.rwt.testfixture.Fixture;
+import org.eclipse.rap.rwt.testfixture.internal.Fixture;
 import org.eclipse.rap.rwt.widgets.WidgetUtil;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Font;
@@ -36,6 +36,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.mockito.ArgumentCaptor;
 
 
+@SuppressWarnings("restriction")
 public class CKEditor_Test extends TestCase {
 
   private Display display;
@@ -138,7 +139,7 @@ public class CKEditor_Test extends TestCase {
   /////////
   // Helper
 
-  private JavaScriptLoader mockJavaScriptLoader() {
+  private static JavaScriptLoader mockJavaScriptLoader() {
     WebClient client = mock( WebClient.class );
     Fixture.fakeClient( client );
     JavaScriptLoader loader = mock( JavaScriptLoader.class );
