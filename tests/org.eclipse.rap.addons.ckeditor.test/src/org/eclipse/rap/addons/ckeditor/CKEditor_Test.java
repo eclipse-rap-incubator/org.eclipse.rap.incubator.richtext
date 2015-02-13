@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2014 EclipseSource and others.
+ * Copyright (c) 2011, 2015 EclipseSource and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,13 +9,6 @@
  *    EclipseSource - initial API and implementation
  ******************************************************************************/
 package org.eclipse.rap.addons.ckeditor;
-
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import junit.framework.TestCase;
 
 import org.eclipse.rap.json.JsonObject;
 import org.eclipse.rap.json.JsonValue;
@@ -33,11 +26,24 @@ import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 import org.mockito.ArgumentCaptor;
+
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.eq;
+
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 
 @SuppressWarnings("restriction")
-public class CKEditor_Test extends TestCase {
+public class CKEditor_Test {
 
   private Display display;
   private Shell shell;
@@ -45,8 +51,8 @@ public class CKEditor_Test extends TestCase {
   private Connection connection;
   private RemoteObject remoteObject;
 
-  @Override
-  protected void setUp() throws Exception {
+  @Before
+  public void setUp() {
     Fixture.setUp();
     display = new Display();
     shell = new Shell( display );
@@ -58,11 +64,12 @@ public class CKEditor_Test extends TestCase {
     editor = new CKEditor( shell, SWT.BORDER );
   }
 
-  @Override
-  protected void tearDown() throws Exception {
+  @After
+  public void tearDown() {
     Fixture.tearDown();
   }
 
+  @Test
   public void testSetLayout() {
     try {
       editor.setLayout( new FillLayout() );
@@ -72,14 +79,17 @@ public class CKEditor_Test extends TestCase {
     }
   }
 
+  @Test
   public void testContructor_CreatesRemoteObjectWithCorrectType() {
     verify( connection ).createRemoteObject( eq( "eclipsesource.CKEditor" ) );
   }
 
+  @Test
   public void testContructor_SetsParent() {
     verify( remoteObject ).set( "parent", WidgetUtil.getId( editor ) );
   }
 
+  @Test
   public void testContructor_LoadsJavaScriptFiles() {
     JavaScriptLoader loader = mockJavaScriptLoader();
     ResourceManager resourceManager = RWT.getResourceManager();
@@ -91,6 +101,7 @@ public class CKEditor_Test extends TestCase {
     verify( loader ).require( resourceManager.getLocation( "ckeditor/handler.js" ) );
   }
 
+  @Test
   public void testSetText_GetText() {
     String text = "foo<span>bar</span>";
 
@@ -99,6 +110,7 @@ public class CKEditor_Test extends TestCase {
     assertEquals( text, editor.getText() );
   }
 
+  @Test
   public void testSetText_RendersToClient() {
     String text = "foo<span>bar</span>";
 
@@ -107,6 +119,7 @@ public class CKEditor_Test extends TestCase {
     verify( remoteObject ).set( "text", text );
   }
 
+  @Test
   public void testSetTextNull() {
     try {
       editor.setText( null );
@@ -116,6 +129,7 @@ public class CKEditor_Test extends TestCase {
     }
   }
 
+  @Test
   public void testSetTextFromClient() {
     String text = "foo<span>bar</span>";
 
@@ -124,12 +138,14 @@ public class CKEditor_Test extends TestCase {
     assertEquals( text, editor.getText() );
   }
 
+  @Test
   public void testSetFont_RendersToClient() {
     editor.setFont( new Font( display, "fantasy", 13, 0 ) );
 
     verify( remoteObject ).set( "font", "13px fantasy" );
   }
 
+  @Test
   public void testDispose_RendersDestroyToClient() {
     editor.dispose();
 
