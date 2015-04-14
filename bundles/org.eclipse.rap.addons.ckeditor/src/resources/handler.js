@@ -81,9 +81,11 @@ var CKEDITOR_BASEPATH = "rwt-resources/ckeditor/";
     },
 
     destroy : function() {
-      rap.off( "send", this.onSend );
-      this.editor.destroy();
-      this.element.parentNode.removeChild( this.element );
+      if( this.element.parentNode ) {
+        rap.off( "send", this.onSend );
+        this.editor.destroy();
+        this.element.parentNode.removeChild( this.element );
+      }
     },
 
     layout : function() {

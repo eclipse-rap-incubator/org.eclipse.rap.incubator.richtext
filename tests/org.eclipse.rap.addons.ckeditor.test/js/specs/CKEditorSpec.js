@@ -265,6 +265,13 @@ describe( "eclipsesource.CKEditor", function() {
       expect( editor.editor.destroy ).toHaveBeenCalled();
     } );
 
+    it( "doesn't throw if destroyed twice", function() {
+      spyOn( editor.editor, "destroy" );
+      editor.destroy();
+      editor.destroy();
+      expect( editor.editor.destroy ).not.toThrow();
+    } );
+
   } );
 
 } );
