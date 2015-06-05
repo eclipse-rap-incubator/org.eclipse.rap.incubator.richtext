@@ -10,6 +10,14 @@
  ******************************************************************************/
 package org.eclipse.rap.addons.ckeditor;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import org.eclipse.rap.json.JsonObject;
 import org.eclipse.rap.json.JsonValue;
 import org.eclipse.rap.rwt.RWT;
@@ -19,30 +27,19 @@ import org.eclipse.rap.rwt.remote.Connection;
 import org.eclipse.rap.rwt.remote.OperationHandler;
 import org.eclipse.rap.rwt.remote.RemoteObject;
 import org.eclipse.rap.rwt.service.ResourceManager;
-import org.eclipse.rap.rwt.testfixture.internal.Fixture;
+import org.eclipse.rap.rwt.testfixture.TestContext;
 import org.eclipse.rap.rwt.widgets.WidgetUtil;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
-import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
-
-
-@SuppressWarnings("restriction")
 public class CKEditor_Test {
 
   private Display display;
@@ -51,22 +48,18 @@ public class CKEditor_Test {
   private Connection connection;
   private RemoteObject remoteObject;
 
+  @Rule
+  public TestContext context = new TestContext();
+
   @Before
   public void setUp() {
-    Fixture.setUp();
     display = new Display();
     shell = new Shell( display );
-    Fixture.fakeNewRequest();
     remoteObject = mock( RemoteObject.class );
     connection = mock( Connection.class );
     when( connection.createRemoteObject( anyString() ) ).thenReturn( remoteObject );
-    Fixture.fakeConnection( connection );
+    context.replaceConnection( connection );
     editor = new CKEditor( shell, SWT.BORDER );
-  }
-
-  @After
-  public void tearDown() {
-    Fixture.tearDown();
   }
 
   @Test
@@ -155,9 +148,9 @@ public class CKEditor_Test {
   /////////
   // Helper
 
-  private static JavaScriptLoader mockJavaScriptLoader() {
+  private JavaScriptLoader mockJavaScriptLoader() {
     WebClient client = mock( WebClient.class );
-    Fixture.fakeClient( client );
+    context.replaceClient( client );
     JavaScriptLoader loader = mock( JavaScriptLoader.class );
     when( client.getService( JavaScriptLoader.class ) ).thenReturn( loader );
     return loader;
