@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 EclipseSource and others.
+ * Copyright (c) 2013, 2015 EclipseSource and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -16,6 +16,7 @@ import org.eclipse.rap.rwt.application.ApplicationConfiguration;
 
 public class CkEditorConfiguration implements ApplicationConfiguration {
 
+  @Override
   public void configure( Application application ) {
     application.addEntryPoint( "/ckeditor", CkEditorDemo.class, null );
   }

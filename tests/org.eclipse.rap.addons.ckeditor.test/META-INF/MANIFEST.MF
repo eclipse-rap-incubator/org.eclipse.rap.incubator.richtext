@@ -4,7 +4,7 @@ Bundle-Name:  RAP CKEditor Widget Tests (Incubation)
 Bundle-SymbolicName: org.eclipse.rap.addons.ckeditor.test
 Bundle-Version: 0.2.0.qualifier
 Bundle-Vendor: Eclipse.org - RAP Incubator
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Fragment-Host: org.eclipse.rap.addons.ckeditor;bundle-version="0.2.0"
 Require-Bundle: org.eclipse.rap.rwt;bundle-version="[3.0.0,4.0.0)",
  org.eclipse.rap.rwt.testfixture;bundle-version="[3.0.0,4.0.0)",

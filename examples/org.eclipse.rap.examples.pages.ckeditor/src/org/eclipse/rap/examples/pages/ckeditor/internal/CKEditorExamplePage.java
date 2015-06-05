@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2013 EclipseSource and others.
+ * Copyright (c) 2012, 2015 EclipseSource and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -29,12 +29,13 @@ import org.eclipse.swt.widgets.Text;
 
 public class CKEditorExamplePage implements IExamplePage {
 
+  @Override
   public void createControl( Composite parent ) {
     parent.setLayout( ExampleUtil.createMainLayout( 2 ) );
     createEditorExample( parent );
   }
 
-  private void createEditorExample( final Composite parent ) {
+  private static void createEditorExample( final Composite parent ) {
     final Display display = parent.getDisplay();
     Composite composite = new Composite( parent, SWT.NONE );
     composite.setLayoutData( ExampleUtil.createFillData() );
@@ -74,7 +75,7 @@ public class CKEditorExamplePage implements IExamplePage {
 
   }
 
-  private void showContent( Composite parent, CKEditor ckEditor, boolean source ) {
+  private static void showContent( Composite parent, CKEditor ckEditor, boolean source ) {
     int style = SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL;
     final Shell content = new Shell( parent.getShell(), style );
     content.setLayout( new GridLayout( 1, true ) );
@@ -109,6 +110,5 @@ public class CKEditorExamplePage implements IExamplePage {
     content.open();
     ok.setFocus();
   }
-
 
 }

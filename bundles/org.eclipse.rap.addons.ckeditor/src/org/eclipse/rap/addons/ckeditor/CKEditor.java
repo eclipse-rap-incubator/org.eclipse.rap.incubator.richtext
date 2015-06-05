@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2014 EclipseSource and others.
+ * Copyright (c) 2011, 2015 EclipseSource and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -71,7 +71,7 @@ public class CKEditor extends Composite {
     remoteObject.set( "parent", WidgetUtil.getId( this ) );
   }
 
-  private void registerResources() {
+  private static void registerResources() {
     ResourceManager resourceManager = RWT.getResourceManager();
     boolean isRegistered = resourceManager.isRegistered( REGISTER_PATH + RESOURCE_FILES[ 0 ] );
     if( !isRegistered ) {
@@ -85,7 +85,7 @@ public class CKEditor extends Composite {
     }
   }
 
-  private void loadJavaScript() {
+  private static void loadJavaScript() {
     JavaScriptLoader jsLoader = RWT.getClient().getService( JavaScriptLoader.class );
     ResourceManager resourceManager = RWT.getResourceManager();
     jsLoader.require( resourceManager.getLocation( REGISTER_PATH + "handler.js" ) );
@@ -93,7 +93,7 @@ public class CKEditor extends Composite {
     jsLoader.require( resourceManager.getLocation( REGISTER_PATH + "config.js" ) );
   }
 
-  private void register( ResourceManager resourceManager, String fileName ) throws IOException {
+  private static void register( ResourceManager resourceManager, String fileName ) throws IOException {
     ClassLoader classLoader = CKEditor.class.getClassLoader();
     InputStream inputStream = classLoader.getResourceAsStream( RESOURCES_PATH + fileName );
     try {
