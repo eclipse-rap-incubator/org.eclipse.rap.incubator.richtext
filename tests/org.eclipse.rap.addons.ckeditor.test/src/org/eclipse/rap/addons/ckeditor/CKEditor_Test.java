@@ -11,7 +11,6 @@
 package org.eclipse.rap.addons.ckeditor;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
@@ -62,28 +61,23 @@ public class CKEditor_Test {
     editor = new CKEditor( shell, SWT.BORDER );
   }
 
-  @Test
-  public void testSetLayout() {
-    try {
-      editor.setLayout( new FillLayout() );
-      fail();
-    } catch( UnsupportedOperationException ex ) {
-      // expected
-    }
+  @Test( expected = UnsupportedOperationException.class )
+  public void testSetLayout_fails() {
+    editor.setLayout( new FillLayout() );
   }
 
   @Test
-  public void testContructor_CreatesRemoteObjectWithCorrectType() {
+  public void testContructor_createsRemoteObjectWithCorrectType() {
     verify( connection ).createRemoteObject( eq( "eclipsesource.CKEditor" ) );
   }
 
   @Test
-  public void testContructor_SetsParent() {
+  public void testContructor_setsParent() {
     verify( remoteObject ).set( "parent", WidgetUtil.getId( editor ) );
   }
 
   @Test
-  public void testContructor_LoadsJavaScriptFiles() {
+  public void testContructor_loadsJavaScriptFiles() {
     JavaScriptLoader loader = mockJavaScriptLoader();
     ResourceManager resourceManager = RWT.getResourceManager();
 
@@ -95,7 +89,7 @@ public class CKEditor_Test {
   }
 
   @Test
-  public void testSetText_GetText() {
+  public void testSetText_affectsGetText() {
     String text = "foo<span>bar</span>";
 
     editor.setText( text );
@@ -104,7 +98,7 @@ public class CKEditor_Test {
   }
 
   @Test
-  public void testSetText_RendersToClient() {
+  public void testSetText_rendersToClient() {
     String text = "foo<span>bar</span>";
 
     editor.setText( text );
@@ -112,18 +106,13 @@ public class CKEditor_Test {
     verify( remoteObject ).set( "text", text );
   }
 
-  @Test
-  public void testSetTextNull() {
-    try {
-      editor.setText( null );
-      fail();
-    } catch( IllegalArgumentException ex ) {
-      // expected
-    }
+  @Test( expected = IllegalArgumentException.class )
+  public void testSetText_failsWithNull() {
+    editor.setText( null );
   }
 
   @Test
-  public void testSetTextFromClient() {
+  public void testSetText_fromClient() {
     String text = "foo<span>bar</span>";
 
     remoteSet( remoteObject, "text", JsonValue.valueOf( text ) );
@@ -132,21 +121,18 @@ public class CKEditor_Test {
   }
 
   @Test
-  public void testSetFont_RendersToClient() {
+  public void testSetFont_rendersToClient() {
     editor.setFont( new Font( display, "fantasy", 13, 0 ) );
 
     verify( remoteObject ).set( "font", "13px fantasy" );
   }
 
   @Test
-  public void testDispose_RendersDestroyToClient() {
+  public void testDispose_rendersDestroyToClient() {
     editor.dispose();
 
     verify( remoteObject ).destroy();
   }
-
-  /////////
-  // Helper
 
   private JavaScriptLoader mockJavaScriptLoader() {
     WebClient client = mock( WebClient.class );
