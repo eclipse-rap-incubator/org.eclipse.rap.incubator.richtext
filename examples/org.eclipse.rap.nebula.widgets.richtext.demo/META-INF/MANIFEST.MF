@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Nebula RichText Widget Demo (Incubation)
+Bundle-SymbolicName: org.eclipse.rap.nebula.widgets.richtext.demo
+Bundle-Version: 0.1.0.qualifier
+Bundle-Vendor: Eclipse.org - RAP Incubator
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-ActivationPolicy: lazy
+Bundle-Activator: org.eclipse.rap.demo.ckeditor.Activator
+Require-Bundle: org.eclipse.rap.nebula.widgets.richtext;bundle-version="0.1.0",
+ org.eclipse.rap.rwt;bundle-version="[3.0.0,4.0.0)"
+Import-Package: org.osgi.framework;version="1.7.0"
