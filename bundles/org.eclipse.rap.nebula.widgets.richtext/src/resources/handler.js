@@ -11,7 +11,7 @@ var CKEDITOR_BASEPATH = "rwt-resources/ckeditor/";
 
     destructor : "destroy",
 
-    properties : [ "text", "editable", "font" ]
+    properties : [ "text", "editable", "visible", "font" ]
 
   } );
 
@@ -49,6 +49,10 @@ var CKEDITOR_BASEPATH = "rwt-resources/ckeditor/";
       if( typeof this._editable !== "undefined" ) {
         this.setEditable( this._editable );
         delete this._editable;
+      }
+      if( typeof this._visible !== "undefined" ) {
+        this.setVisible( this._visible );
+        delete this._visible;
       }
     },
 
@@ -91,6 +95,14 @@ var CKEDITOR_BASEPATH = "rwt-resources/ckeditor/";
         } );
       } else {
         this._font = font;
+      }
+    },
+
+    setVisible : function( visible ) {
+      if( this.ready ) {
+        this.element.style.display = visible ? "" : "none";
+      } else {
+        this._visible = visible;
       }
     },
 

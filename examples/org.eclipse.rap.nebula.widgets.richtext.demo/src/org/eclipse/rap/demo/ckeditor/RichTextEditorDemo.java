@@ -63,6 +63,24 @@ public class RichTextEditorDemo extends AbstractEntryPoint {
         richTextEditor.setFont( new Font( parent.getDisplay(), "serif", 9, 0 ) );
       }
     } );
+    final ToolItem editableBtn = new ToolItem( toolbar, SWT.CHECK );
+    editableBtn.setText( "Editable" );
+    editableBtn.setSelection( true );
+    editableBtn.addSelectionListener( new SelectionAdapter() {
+      @Override
+      public void widgetSelected( SelectionEvent e ) {
+        richTextEditor.setEditable( editableBtn.getSelection() );
+      }
+    } );
+    final ToolItem visibleBtn = new ToolItem( toolbar, SWT.CHECK );
+    visibleBtn.setText( "Visible" );
+    visibleBtn.setSelection( true );
+    visibleBtn.addSelectionListener( new SelectionAdapter() {
+      @Override
+      public void widgetSelected( SelectionEvent e ) {
+        richTextEditor.setVisible( visibleBtn.getSelection() );
+      }
+    } );
     ToolItem clearBtn = new ToolItem( toolbar, SWT.NONE );
     clearBtn.setText( "Clear" );
     clearBtn.addSelectionListener( new SelectionAdapter() {

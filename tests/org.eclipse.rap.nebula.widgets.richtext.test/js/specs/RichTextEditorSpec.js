@@ -219,6 +219,31 @@ describe( "rwt.widgets.RichTextEditor", function() {
 
   } );
 
+  describe( "The setVisible function", function() {
+
+    beforeEach( function() {
+      createEditor();
+      editor.onRender.call();
+      editor.setVisible( false );
+    } );
+
+    it( "does nothing when editor is not ready", function() {
+      expect( editor.element.style.display ).toBe( "" );
+    } );
+
+    it( "sets display style property on a ready event", function() {
+      editor.onReady.call();
+      expect( editor.element.style.display ).toBe( "none" );
+    } );
+
+    it( "calls setReadOnly after a ready event", function() {
+      editor.onReady.call();
+      editor.setVisible( true );
+      expect( editor.element.style.display ).toBe( "" );
+    } );
+
+  } );
+
   describe( "The onSend function", function() {
 
     beforeEach( function() {
