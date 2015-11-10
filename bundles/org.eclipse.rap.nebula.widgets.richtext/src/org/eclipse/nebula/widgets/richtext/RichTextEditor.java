@@ -63,6 +63,7 @@ public class RichTextEditor extends Composite {
   private static final String REMOTE_TYPE = "rwt.widgets.RichTextEditor";
 
   private String text = "";
+  private boolean editable = true;
   private final RemoteObject remoteObject;
 
   private final OperationHandler operationHandler = new AbstractOperationHandler() {
@@ -162,6 +163,30 @@ public class RichTextEditor extends Composite {
   public String getText() {
     checkWidget();
     return text;
+  }
+
+  /**
+   * Returns the editable state.
+   *
+   * @return whether or not the receiver is editable
+   *
+   */
+  public boolean isEditable() {
+    checkWidget();
+    return editable;
+  }
+
+  /**
+   * Sets the editable state.
+   *
+   * @param editable the new editable state
+   */
+  public void setEditable( boolean editable ) {
+    checkWidget();
+    if( this.editable != editable ) {
+      this.editable = editable;
+      remoteObject.set( "editable", editable );
+    }
   }
 
   private String getCssFont() {

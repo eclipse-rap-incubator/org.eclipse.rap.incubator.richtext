@@ -17,7 +17,7 @@
 
   createStubs(
     CKEDITOR.editor.prototype,
-    [ "on", "resize", "setData", "getData", "checkDirty", "resetDirty", "destroy" ]
+    [ "on", "resize", "setData", "getData", "setReadOnly", "checkDirty", "resetDirty", "destroy" ]
   );
 
   CKEDITOR.editor.prototype.document = {

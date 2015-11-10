@@ -193,6 +193,31 @@ describe( "rwt.widgets.RichTextEditor", function() {
 
   } );
 
+  describe( "The setEditable function", function() {
+
+    beforeEach( function() {
+      createEditor();
+      editor.onRender.call();
+      spyOn( editor.editor, "setReadOnly" );
+      editor.setEditable( false );
+    } );
+
+    it( "does nothing when editor is not ready", function() {
+      expect( editor.editor.setReadOnly ).not.toHaveBeenCalled();
+    } );
+
+    it( "calls setReadOnly on a ready event", function() {
+      editor.onReady.call();
+      expect( editor.editor.setReadOnly ).toHaveBeenCalledWith( true );
+    } );
+
+    it( "calls setReadOnly after a ready event", function() {
+      editor.onReady.call();
+      editor.setEditable( true );
+      expect( editor.editor.setReadOnly ).toHaveBeenCalledWith( false );
+    } );
+
+  } );
 
   describe( "The onSend function", function() {
 

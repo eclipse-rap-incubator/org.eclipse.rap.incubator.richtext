@@ -11,6 +11,7 @@
 package org.eclipse.nebula.widgets.richtext;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
@@ -125,6 +126,20 @@ public class RichTextEditor_Test {
     editor.setFont( new Font( display, "fantasy", 13, 0 ) );
 
     verify( remoteObject ).set( "font", "13px fantasy" );
+  }
+
+  @Test
+  public void testSetEditable_rendersToClient() {
+    editor.setEditable( false );
+
+    verify( remoteObject ).set( "editable", false );
+  }
+
+  @Test
+  public void testIsEditable() {
+    editor.setEditable( false );
+
+    assertFalse( editor.isEditable() );
   }
 
   @Test
