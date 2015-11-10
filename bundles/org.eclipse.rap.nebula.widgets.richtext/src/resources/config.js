@@ -152,7 +152,7 @@ CKEDITOR.editorConfig = function( config ) {
 
   // [ RAP ] - do not change:
 
-  config.skin = 'kama';
+  config.skin = 'moono';
 
   config.colorButton_enableMore = false;
 
@@ -205,8 +205,7 @@ CKEDITOR.editorConfig = function( config ) {
     "tab",
     "templates",
     "undo",
-    "wsc",
-    "panelbutton"
+    "wsc"
   ].join();
 
 };

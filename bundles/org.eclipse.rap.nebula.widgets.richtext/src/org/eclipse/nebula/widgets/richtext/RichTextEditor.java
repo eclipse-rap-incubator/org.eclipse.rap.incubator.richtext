@@ -38,13 +38,27 @@ public class RichTextEditor extends Composite {
   private static final String[] RESOURCE_FILES = {
     "ckeditor.js",
     "config.js",
+    "styles.js",
     "handler.js",
     "contents.css",
+    "lang/id.js",
     "lang/en.js",
-    "skins/kama/editor.css",
-    "skins/kama/icons.png",
-    "skins/kama/images/sprites.png",
-    "skins/kama/images/sprites_ie6.png"
+    "skins/moono/editor.css",
+    "skins/moono/editor_ie.css",
+    "skins/moono/editor_gecko.css",
+    "skins/moono/dialog.css",
+    "skins/moono/dialog_ie.css",
+    "skins/moono/icons.png",
+    "skins/moono/icons_hidpi.png",
+    "skins/moono/images/arrow.png",
+    "skins/moono/images/close.png",
+    "skins/moono/images/lock-open.png",
+    "skins/moono/images/lock.png",
+    "skins/moono/images/refresh.png",
+    "skins/moono/images/hidpi/close.png",
+    "skins/moono/images/hidpi/lock-open.png",
+    "skins/moono/images/hidpi/lock.png",
+    "skins/moono/images/hidpi/refresh.png"
   };
   private static final String REMOTE_TYPE = "rwt.widgets.RichTextEditor";
 
