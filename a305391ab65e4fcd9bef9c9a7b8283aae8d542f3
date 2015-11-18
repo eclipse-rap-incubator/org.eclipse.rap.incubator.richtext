@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "67ccbf7d_d2d9c29d",
+        "filename": "bundles/org.eclipse.rap.nebula.widgets.richtext/src/org/eclipse/nebula/widgets/richtext/RichTextEditor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 2305
+      },
+      "writtenOn": "2015-11-18T13:44:39Z",
+      "side": 1,
+      "message": "Doesn\u0027t this already hide the composite the editor is in?",
+      "revId": "a305391ab65e4fcd9bef9c9a7b8283aae8d542f3",
+      "serverId": "97ee7c02-f12f-4043-b43e-dea463d88b31",
+      "unresolved": false
+    }
+  ]
+}
