@@ -1,25 +1,20 @@
+/*******************************************************************************
+ * Copyright (c) 2015 EclipseSource and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    EclipseSource - initial API and implementation
+ ******************************************************************************/
+
 var CKEDITOR_BASEPATH = "rwt-resources/ckeditor/";
 
 (function(){
   'use strict';
 
-  rap.registerTypeHandler( "rwt.widgets.RichTextEditor", {
-
-    factory : function( properties ) {
-      return new rwt.widgets.RichTextEditor( properties );
-    },
-
-    destructor : "destroy",
-
-    properties : [ "text", "editable", "font" ]
-
-  } );
-
-  if( !window.rwt ) {
-    window.rwt = {
-      widgets : {}
-    };
-  }
+  rwt.define( "rwt.widgets" );
 
   rwt.widgets.RichTextEditor = function( properties ) {
     bindAll( this, [ "layout", "onReady", "onSend", "onRender" ] );
@@ -35,7 +30,6 @@ var CKEDITOR_BASEPATH = "rwt-resources/ckeditor/";
     ready : false,
 
     onReady : function() {
-      // TODO [tb] : on IE 7/8 the iframe and body has to be made transparent explicitly
       this.ready = true;
       this.layout();
       if( this._text ) {
@@ -113,23 +107,24 @@ var CKEDITOR_BASEPATH = "rwt-resources/ckeditor/";
 
   };
 
-  var bind = function( context, method ) {
-    return function() {
-      return method.apply( context, arguments );
-    };
-  };
-
-  var bindAll = function( context, methodNames ) {
+  function bindAll( context, methodNames ) {
     for( var i = 0; i < methodNames.length; i++ ) {
       var method = context[ methodNames[ i ] ];
       context[ methodNames[ i ] ] = bind( context, method );
     }
   };
 
-  var async = function( context, func ) {
+  function bind( context, method ) {
+    return function() {
+      return method.apply( context, arguments );
+    };
+  };
+
+  function async( context, func ) {
     window.setTimeout( function(){
       func.apply( context );
     }, 0 );
   };
 
 }());
+

@@ -39,7 +39,6 @@ public class RichTextEditor extends Composite {
     "ckeditor.js",
     "config.js",
     "styles.js",
-    "handler.js",
     "contents.css",
     "lang/id.js",
     "lang/en.js",
@@ -58,7 +57,9 @@ public class RichTextEditor extends Composite {
     "skins/moono/images/hidpi/close.png",
     "skins/moono/images/hidpi/lock-open.png",
     "skins/moono/images/hidpi/lock.png",
-    "skins/moono/images/hidpi/refresh.png"
+    "skins/moono/images/hidpi/refresh.png",
+    "RichTextEditor.js",
+    "RichTextEditorHandler.js"
   };
   private static final String REMOTE_TYPE = "rwt.widgets.RichTextEditor";
 
@@ -103,9 +104,10 @@ public class RichTextEditor extends Composite {
   private static void loadJavaScript() {
     JavaScriptLoader jsLoader = RWT.getClient().getService( JavaScriptLoader.class );
     ResourceManager resourceManager = RWT.getResourceManager();
-    jsLoader.require( resourceManager.getLocation( REGISTER_PATH + "handler.js" ) );
     jsLoader.require( resourceManager.getLocation( REGISTER_PATH + "ckeditor.js" ) );
     jsLoader.require( resourceManager.getLocation( REGISTER_PATH + "config.js" ) );
+    jsLoader.require( resourceManager.getLocation( REGISTER_PATH + "RichTextEditor.js" ) );
+    jsLoader.require( resourceManager.getLocation( REGISTER_PATH + "RichTextEditorHandler.js" ) );
   }
 
   private static void register( ResourceManager resourceManager, String fileName ) throws IOException {
