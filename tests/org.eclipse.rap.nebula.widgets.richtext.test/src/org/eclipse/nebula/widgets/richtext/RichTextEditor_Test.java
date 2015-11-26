@@ -143,13 +143,6 @@ public class RichTextEditor_Test {
   }
 
   @Test
-  public void testSetVisible_rendersToClient() {
-    editor.setVisible( false );
-
-    verify( remoteObject ).set( "visible", false );
-  }
-
-  @Test
   public void testGetVisible() {
     editor.setVisible( false );
 
