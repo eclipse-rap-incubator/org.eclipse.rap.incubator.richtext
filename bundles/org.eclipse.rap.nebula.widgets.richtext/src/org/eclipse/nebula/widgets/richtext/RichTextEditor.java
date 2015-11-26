@@ -133,12 +133,6 @@ public class RichTextEditor extends Composite {
   }
 
   @Override
-  public void setVisible( boolean visible ) {
-    super.setVisible( visible );
-    remoteObject.set( "visible", visible );
-  }
-
-  @Override
   public void dispose() {
     if( !isDisposed() ) {
       remoteObject.destroy();
