@@ -12,6 +12,7 @@ package org.eclipse.nebula.widgets.richtext;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertSame;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
@@ -32,6 +33,7 @@ import org.eclipse.rap.rwt.widgets.WidgetUtil;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.junit.Before;
@@ -86,7 +88,8 @@ public class RichTextEditor_Test {
 
     verify( loader ).require( resourceManager.getLocation( "ckeditor/ckeditor.js" ) );
     verify( loader ).require( resourceManager.getLocation( "ckeditor/config.js" ) );
-    verify( loader ).require( resourceManager.getLocation( "ckeditor/handler.js" ) );
+    verify( loader ).require( resourceManager.getLocation( "ckeditor/RichTextEditor.js" ) );
+    verify( loader ).require( resourceManager.getLocation( "ckeditor/RichTextEditorHandler.js" ) );
   }
 
   @Test
@@ -154,6 +157,21 @@ public class RichTextEditor_Test {
     editor.dispose();
 
     verify( remoteObject ).destroy();
+  }
+
+  @Test
+  public void testIsReparentable() {
+    assertFalse( editor.isReparentable() );
+  }
+
+  @Test
+  public void testSetParent() {
+    Composite newParent = new Composite( shell, SWT.NONE );
+
+    boolean success = editor.setParent( newParent );
+
+    assertFalse( success );
+    assertSame( shell, editor.getParent() );
   }
 
   private JavaScriptLoader mockJavaScriptLoader() {

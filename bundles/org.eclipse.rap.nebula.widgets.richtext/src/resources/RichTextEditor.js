@@ -17,11 +17,12 @@ var CKEDITOR_BASEPATH = "rwt-resources/ckeditor/";
   rwt.define( "rwt.widgets" );
 
   rwt.widgets.RichTextEditor = function( properties ) {
-    bindAll( this, [ "layout", "onReady", "onSend", "onRender" ] );
+    bindAll( this, [ "layout", "onReady", "onSend", "onRender", "destroy" ] );
     this.parent = rap.getObject( properties.parent );
     this.element = document.createElement( "div" );
     this.parent.append( this.element );
     this.parent.addListener( "Resize", this.layout );
+    this.parent.addListener( "Dispose", this.destroy );
     rap.on( "render", this.onRender );
   };
 

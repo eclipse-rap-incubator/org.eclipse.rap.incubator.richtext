@@ -193,6 +193,20 @@ public class RichTextEditor extends Composite {
     }
   }
 
+  @Override
+  public boolean setParent( Composite parent ) {
+    checkWidget();
+    // CKEditor can't be reparented
+    return false;
+  }
+
+  @Override
+  public boolean isReparentable() {
+    checkWidget();
+    // CKEditor can't be reparented
+    return false;
+  }
+
   private String getCssFont() {
     StringBuilder result = new StringBuilder();
     if( getFont() != null ) {

@@ -18,8 +18,6 @@
       return new rwt.widgets.RichTextEditor( properties );
     },
 
-    destructor : "destroy",
-
     properties : [ "text", "editable", "font" ]
 
   } );
